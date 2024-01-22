@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;  // ← 修正
 import java.sql.SQLException;
 
-public class Review05 {
+public class Review05a {
 
     public static void main(String[] args) {
         // 3. データベース接続と結果取得のための変数宣言
@@ -33,10 +33,10 @@ public class Review05 {
 
             // 5, 6. Select文の実行と結果を格納／代入
             System.out.print("検索キーワードを入力してください > ");
-            int num = setInt();
+            String key = keyIn();
 
            // PreparedStatementオブジェクトの?に値をセット  // ← 追記
-            pstmt.setInt(1, num);  // ← 追記
+            pstmt.setString(1, key);  // ← 追記
             rs = pstmt.executeQuery();  // ← 修正
 
             // 7. 結果を表示する

@@ -8,9 +8,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;  // ← 修正
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class DbConnectSample04 {
+public class Review05 {
 
     public static void main(String[] args) {
         // 3. データベース接続と結果取得のための変数宣言
@@ -24,32 +23,32 @@ public class DbConnectSample04 {
 
             // 2. DBと接続する
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/world?useSSL=false&allowPublicKeyRetrieval=true",
+                    "jdbc:mysql://localhost/kadaidb?useSSL=false&allowPublicKeyRetrieval=true",
                     "root",
                     "7851zaqW");
 
             // 4. DBとやりとりする窓口（Statementオブジェクト）の作成
-            String sql = "SELECT * FROM country WHERE Name = ?";    // ← 修正
+            String sql = "SELECT * FROM person WHERE id = ?";    // ← 修正
             pstmt = con.prepareStatement(sql);  // ← 修正
 
             // 5, 6. Select文の実行と結果を格納／代入
             System.out.print("検索キーワードを入力してください > ");
-            String input = keyIn();
+            int num = setInt();
 
            // PreparedStatementオブジェクトの?に値をセット  // ← 追記
-            pstmt.setString(1, input);  // ← 追記
+            pstmt.setInt(1, num);  // ← 追記
             rs = pstmt.executeQuery();  // ← 修正
 
             // 7. 結果を表示する
             while(rs.next()) {
                 //name列の値を取得
                 String name = rs.getString("Name");
-                //Population列の値を取得
-                int population = rs.getInt("Population");
+                //age列の値を取得
+                int age = rs.getInt("Age");
 
                 //取得した値を表示
                 System.out.println(name);
-                System.out.println(population);
+                System.out.println(age);
             }
 
         } catch (ClassNotFoundException e) {
@@ -100,7 +99,6 @@ public class DbConnectSample04 {
         }
         return line;
     }
-
     /*
      * キーボードから入力された値をintで返す 引数：なし 戻り値：int
      */
@@ -113,7 +111,9 @@ public class DbConnectSample04 {
         return result;
     }
 
-}
+
+
+ }
 
 
 
